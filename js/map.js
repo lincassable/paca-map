@@ -12,16 +12,6 @@ L.tileLayer(
   }
 ).addTo(map);
 
-L.geoJSON(communes, {
-  style: function (feature) {
-    return { color: "#3388ff", weight: 0.5, fill: false };
-  }
-})
-  .bindPopup(function (layer) {
-    return layer.feature.properties.nom;
-  })
-  .addTo(map);
-
 L.geoJSON(departements, {
   style: function (feature) {
     return {
@@ -29,6 +19,106 @@ L.geoJSON(departements, {
       weight: 1,
       fill: !!feature.properties.color,
       fillColor: feature.properties.color,
+      fillOpacity: 0.6
+    };
+  }
+}).addTo(map);
+
+// L.geoJSON(communes, {
+//   style: function (feature) {
+//     return { color: "#3388ff", weight: 0.5, fill: false };
+//   }
+// })
+//   .bindPopup(function (layer) {
+//     return layer.feature.properties.nom;
+//   })
+//   .addTo(map);
+
+L.geoJSON(marseilleProvence, {
+  style: function (feature) {
+    return {
+      color: "#3388ff",
+      weight: 1,
+      fillColor: "#FDEA18",
+      fillOpacity: 0.6
+    };
+  }
+}).addTo(map);
+
+L.geoJSON(paysAubagne, {
+  style: function (feature) {
+    return {
+      color: "#3388ff",
+      weight: 1,
+      fillColor: "#FDEA18",
+      fillOpacity: 0.6
+    };
+  }
+}).addTo(map);
+
+L.geoJSON(paysMartigues, {
+  style: function (feature) {
+    return {
+      color: "#3388ff",
+      weight: 1,
+      fillColor: "#FDEA18",
+      fillOpacity: 0.6
+    };
+  }
+}).addTo(map);
+
+L.geoJSON(paysSalonnais, {
+  style: function (feature) {
+    return {
+      color: "#3388ff",
+      weight: 1,
+      fillColor: "#FDEA18",
+      fillOpacity: 0.6
+    };
+  }
+}).addTo(map);
+
+L.geoJSON(paysIstres, {
+  style: function (feature) {
+    return {
+      color: "#3388ff",
+      weight: 1,
+      fillColor: "#FDEA18",
+      fillOpacity: 0.6
+    };
+  }
+}).addTo(map);
+
+L.geoJSON(arles, {
+  style: function (feature) {
+    return {
+      color: "#3388ff",
+      weight: 1,
+      fillColor: "#FDEA18",
+      fillOpacity: 0.6
+    };
+  }
+}).addTo(map);
+
+L.geoJSON(paysdAix, {
+  style: function (feature) {
+    return {
+      color: "#3388ff",
+      weight: 1,
+      fill: false,
+      fillColor: "#FDEA18",
+      fillOpacity: 0.6
+    };
+  }
+}).addTo(map);
+
+L.geoJSON(vaucluse, {
+  style: function (feature) {
+    return {
+      color: "#3388ff",
+      weight: 1,
+      fill: false,
+      fillColor: "#FDEA18",
       fillOpacity: 0.6
     };
   }

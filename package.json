@@ -1,0 +1,22 @@
+{
+  "name": "paca-map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lincassable/paca-map.git"
+  },
+  "author": "Benoit Guigal <benoit@postcardgroup.com> (https://figuredevices.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lincassable/paca-map/issues"
+  },
+  "homepage": "https://github.com/lincassable/paca-map#readme",
+  "dependencies": {
+    "csv-parser": "^3.0.0"
+  }
+}
