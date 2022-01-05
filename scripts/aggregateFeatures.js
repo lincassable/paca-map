@@ -128,7 +128,7 @@ function aggregateFeatures() {
           nom: feature.properties.nom,
           ...(feature.properties.code != "05"
             ? { operateur: "LA CONSIGNE DE PROVENCE" }
-            : {})
+            : { operateur: null })
         }
       });
   }

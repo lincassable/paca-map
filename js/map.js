@@ -12,23 +12,68 @@ L.tileLayer(
   }
 ).addTo(map);
 
+function onEachFeature(feature, layer) {
+  var popup = document.createElement("div");
+  var title = document.createElement("div");
+  var select = document.createElement("select"),
+    option0 = document.createElement("option"),
+    option1 = document.createElement("option"),
+    option2 = document.createElement("option");
+
+  select.addEventListener("change", function () {
+    restyleLayer(this.value, this.layer);
+  });
+
+  select.layer = layer;
+
+  title.innerHTML = feature.properties.nom;
+
+  option0.value = "Nope";
+  option0.selected = feature.properties.operateur == null;
+  option0.innerHTML = "null";
+
+  option1.value = "L'INCASSABLE";
+  option1.selected = feature.properties.operateur == "L'INCASSABLE";
+  option1.innerHTML = "L'INCASSABLE";
+
+  option2.value = "LA CONSIGNE DE PROVENCE";
+  option2.selected = feature.properties.operateur == "LA CONSIGNE DE PROVENCE";
+  option2.innerHTML = "LA CONSIGNE DE PROVENCE";
+
+  select.appendChild(option0);
+  select.appendChild(option1);
+  select.appendChild(option2);
+  popup.appendChild(title);
+  popup.appendChild(select);
+
+  layer.bindPopup(popup);
+}
+
+function getColor(operateur) {
+  switch (operateur) {
+    case "L'INCASSABLE":
+      return "#FDEA18";
+    case "LA CONSIGNE DE PROVENCE":
+      return "#f3d4dc";
+    default:
+      return "#00000000";
+  }
+}
+
+function restyleLayer(operateur, layer) {
+  layer.feature.properties.operateur = operateur;
+  layer.setStyle({ fillColor: getColor(operateur) });
+}
+
 L.geoJSON(pacaConsigne, {
   style: function (feature) {
     return {
       color: "#3388ff",
       weight: 1,
       fill: true,
-      fillColor:
-        feature.properties.operateur == "L'INCASSABLE"
-          ? "#FDEA18"
-          : feature.properties.operateur == "LA CONSIGNE DE PROVENCE"
-          ? "#f3d4dc"
-          : "#00000000", // transparent
+      fillColor: getColor(feature.properties.operateur),
       fillOpacity: 0.6
     };
-  }
-})
-  .bindPopup(function (layer) {
-    return layer.feature.properties.nom;
-  })
-  .addTo(map);
+  },
+  onEachFeature
+}).addTo(map);
