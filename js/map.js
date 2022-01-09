@@ -82,7 +82,7 @@ L.geoJSON(pacaCommunes, {
       weight: 0.3,
       fill: true,
       fillColor: getColor(feature.properties.operateur),
-      fillOpacity: 0.6
+      fillOpacity: 0.4
     };
   },
   onEachFeature
@@ -95,7 +95,7 @@ L.geoJSON(rhoneAlpesDepartements, {
       weight: 1,
       fill: true,
       fillColor: getColor(feature.properties.operateur),
-      fillOpacity: 0.6
+      fillOpacity: 0.4
     };
   }
 })
@@ -111,7 +111,7 @@ L.geoJSON(occitanie, {
       weight: 1,
       fill: true,
       fillColor: getColor(feature.properties.operateur),
-      fillOpacity: 0.6
+      fillOpacity: 0.4
     };
   }
 })
