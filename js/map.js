@@ -55,6 +55,16 @@ function getColor(operateur) {
       return "#FDEA18";
     case "LA CONSIGNE DE PROVENCE":
       return "#f3d4dc";
+    case "MBSR":
+      return "#b6e0f5";
+    case "REBOOTEILLE":
+      return "#ec6b04";
+    case "ALPES CONSIGNE":
+      return "#1d8264";
+    case "OC CONSIGNE":
+      return "#80c4ac";
+    case "CONSIGN UP":
+      return "#ffdc2c";
     default:
       return "#00000000";
   }
@@ -65,7 +75,20 @@ function restyleLayer(operateur, layer) {
   layer.setStyle({ fillColor: getColor(operateur) });
 }
 
-L.geoJSON(pacaConsigne, {
+L.geoJSON(pacaCommunes, {
+  style: function (feature) {
+    return {
+      color: "#3388ff",
+      weight: 0.3,
+      fill: true,
+      fillColor: getColor(feature.properties.operateur),
+      fillOpacity: 0.6
+    };
+  },
+  onEachFeature
+}).addTo(map);
+
+L.geoJSON(rhoneAlpesDepartements, {
   style: function (feature) {
     return {
       color: "#3388ff",
@@ -73,6 +96,45 @@ L.geoJSON(pacaConsigne, {
       fill: true,
       fillColor: getColor(feature.properties.operateur),
       fillOpacity: 0.6
+    };
+  }
+})
+  .bindPopup((layer) => {
+    return layer.feature.properties.operateur;
+  })
+  .addTo(map);
+
+L.geoJSON(occitanie, {
+  style: function (feature) {
+    return {
+      color: "#3388ff",
+      weight: 1,
+      fill: true,
+      fillColor: getColor(feature.properties.operateur),
+      fillOpacity: 0.6
+    };
+  }
+})
+  .bindPopup((layer) => {
+    return layer.feature.properties.operateur;
+  })
+  .addTo(map);
+
+L.geoJSON(pacaDepartements, {
+  style: function () {
+    return {
+      weight: 1,
+      fill: false
+    };
+  },
+  onEachFeature
+}).addTo(map);
+
+L.geoJSON(ampTerritoires, {
+  style: function () {
+    return {
+      weight: 1,
+      fill: false
     };
   },
   onEachFeature

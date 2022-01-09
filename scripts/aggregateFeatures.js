@@ -20,123 +20,191 @@ const salon = JSON.parse(
   fs.readFileSync("data/AMP/territoires/PAYS SALONAIS.json")
 );
 
-const aix = JSON.parse(fs.readFileSync("data/AMP/communes/PAYS D'AIX.json"));
+const aix = JSON.parse(fs.readFileSync("data/AMP/territoires/PAYS D'AIX.json"));
 
-const vaucluse = JSON.parse(fs.readFileSync("data/vaucluse.json"));
+const departements = JSON.parse(fs.readFileSync("data/departements.json"));
 
-const departementsPaca = JSON.parse(
-  fs.readFileSync("data/departements-paca.json")
+const franceCommunes = JSON.parse(
+  fs.readFileSync("data/communes-20190101.json")
 );
 
-const arles = JSON.parse(fs.readFileSync("data/arles.json"));
+const occitanieGeoJson = JSON.parse(fs.readFileSync("data/occitanie.geojson"));
 
 function aggregateFeatures() {
-  const geojson = {
+  const pacaCommunesGeoJson = {
     type: "FeatureCollection",
     features: []
   };
 
-  geojson.features.push({
+  const pacaDepartementGeoJson = {
+    type: "FeatureCollection",
+    features: []
+  };
+
+  const ampTerritoiresGeoJson = {
+    type: "FeatureCollection",
+    features: []
+  };
+
+  const rhoneAlpesDepartementsGeoJson = {
+    type: "FeatureCollection",
+    features: []
+  };
+
+  ampTerritoiresGeoJson.features.push({
     type: "Feature",
     geometry: marseille.geometries[0],
     properties: {
-      nom: "Marseille-Provence",
-      operateur: "L'INCASSABLE"
+      nom: "Marseille-Provence"
     }
   });
 
-  geojson.features.push({
+  ampTerritoiresGeoJson.features.push({
     type: "Feature",
     geometry: salon.geometries[0],
     properties: {
-      nom: "Pays Salonnais",
-      operateur: "L'INCASSABLE"
+      nom: "Pays Salonnais"
     }
   });
 
-  geojson.features.push({
+  ampTerritoiresGeoJson.features.push({
     type: "Feature",
     geometry: aubagne.geometries[0],
     properties: {
-      nom: "Pays d'Aubagne et de l'Étoile",
-      operateur: "L'INCASSABLE"
+      nom: "Pays d'Aubagne et de l'Étoile"
     }
   });
 
-  geojson.features.push({
+  ampTerritoiresGeoJson.features.push({
     type: "Feature",
     geometry: istres.geometries[0],
     properties: {
-      nom: "Istres Ouest Provence",
-      operateur: "L'INCASSABLE"
+      nom: "Istres Ouest Provence"
     }
   });
 
-  geojson.features.push({
+  ampTerritoiresGeoJson.features.push({
     type: "Feature",
     geometry: martigues.geometries[0],
     properties: {
-      nom: "Pays de Martigues",
-      operateur: "L'INCASSABLE"
+      nom: "Pays de Martigues"
     }
   });
 
-  geojson.features.push({
+  ampTerritoiresGeoJson.features.push({
     type: "Feature",
-    geometry: martigues.geometries[0],
+    geometry: aix.geometries[0],
     properties: {
-      nom: "Pays de Martigues",
-      operateur: "L'INCASSABLE"
+      nom: "Aix"
     }
   });
 
-  geojson.features.push({
-    type: "Feature",
-    geometry: arles.geometries[0],
-    properties: {
-      nom: "Arles",
-      operateur: "L'INCASSABLE"
+  for (const feature of departements.features) {
+    if (["13", "84"].includes(feature.properties.code)) {
+      pacaDepartementGeoJson.features.push({
+        type: "Feature",
+        geometry: feature.geometry,
+        properties: {
+          nom: feature.properties.nom
+        }
+      });
     }
-  });
 
-  for (const feature of aix.features) {
-    geojson.features.push({
-      type: "Feature",
-      geometry: feature.geometry,
-      properties: {
-        nom: feature.properties.nom
-      }
-    });
-  }
+    if (["83", "04", "06"].includes(feature.properties.code)) {
+      pacaDepartementGeoJson.features.push({
+        type: "Feature",
+        geometry: feature.geometry,
+        properties: {
+          nom: feature.properties.nom
+        }
+      });
+    }
 
-  for (const feature of vaucluse.features) {
-    geojson.features.push({
-      type: "Feature",
-      geometry: feature.geometry,
-      properties: {
-        nom: feature.properties.nom
-      }
-    });
-  }
-
-  for (const feature of departementsPaca.features) {
-    if (!["13", "84"].includes(feature.properties.code))
-      geojson.features.push({
+    if (["07", "26"].includes(feature.properties.code)) {
+      rhoneAlpesDepartementsGeoJson.features.push({
         type: "Feature",
         geometry: feature.geometry,
         properties: {
           nom: feature.properties.nom,
-          ...(feature.properties.code != "05"
-            ? { operateur: "LA CONSIGNE DE PROVENCE" }
-            : { operateur: null })
+          operateur: "MBSR"
         }
       });
+    }
+
+    if (["69", "42", "01"].includes(feature.properties.code)) {
+      rhoneAlpesDepartementsGeoJson.features.push({
+        type: "Feature",
+        geometry: feature.geometry,
+        properties: {
+          nom: feature.properties.nom,
+          operateur: "REBOOTEILLE"
+        }
+      });
+    }
+
+    if (["38", "73", "74"].includes(feature.properties.code)) {
+      rhoneAlpesDepartementsGeoJson.features.push({
+        type: "Feature",
+        geometry: feature.geometry,
+        properties: {
+          nom: feature.properties.nom,
+          operateur: "ALPES CONSIGNE"
+        }
+      });
+    }
   }
 
-  fs.writeFileSync("data/paca-consigne.json", JSON.stringify(geojson));
+  for (const feature of franceCommunes.features) {
+    if (
+      feature.properties.insee.startsWith("13") ||
+      feature.properties.insee.startsWith("84")
+    ) {
+      pacaCommunesGeoJson.features.push({
+        type: "Feature",
+        geometry: feature.geometry,
+        properties: {
+          nom: feature.properties.nom,
+          operateur: "L'INCASSABLE"
+        }
+      });
+    }
+    if (
+      feature.properties.insee.startsWith("83") ||
+      feature.properties.insee.startsWith("04") ||
+      feature.properties.insee.startsWith("06")
+    ) {
+      pacaCommunesGeoJson.features.push({
+        type: "Feature",
+        geometry: feature.geometry,
+        properties: {
+          nom: feature.properties.nom,
+          operateur: "LA CONSIGNE DE PROVENCE"
+        }
+      });
+    }
+  }
   fs.writeFileSync(
-    "js/paca-consigne.js",
-    `var pacaConsigne = ${JSON.stringify(geojson)}`
+    "js/paca-communes.js",
+    `var pacaCommunes = ${JSON.stringify(pacaCommunesGeoJson)}`
+  );
+  fs.writeFileSync(
+    "js/paca-departements.js",
+    `var pacaDepartements = ${JSON.stringify(pacaDepartementGeoJson)}`
+  );
+  fs.writeFileSync(
+    "js/amp-territoires.js",
+    `var ampTerritoires = ${JSON.stringify(ampTerritoiresGeoJson)}`
+  );
+  fs.writeFileSync(
+    "js/rhone-alpes-departements.js",
+    `var rhoneAlpesDepartements = ${JSON.stringify(
+      rhoneAlpesDepartementsGeoJson
+    )}`
+  );
+
+  fs.writeFileSync(
+    "js/occitanie.js",
+    `var occitanie = ${JSON.stringify(occitanieGeoJson)}`
   );
 }
 
