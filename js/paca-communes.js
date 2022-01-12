@@ -32651,7 +32651,7 @@ var pacaCommunes = {
       },
       properties: {
         nom: "Entrechaux",
-        operateur: "L'INCASSABLE"
+        operateur: null
       }
     },
     {
@@ -32690,7 +32690,7 @@ var pacaCommunes = {
       },
       properties: {
         nom: "Saint-Marcellin-lès-Vaison",
-        operateur: "L'INCASSABLE"
+        operateur: null
       }
     },
     {
@@ -32902,7 +32902,7 @@ var pacaCommunes = {
       },
       properties: {
         nom: "Crestet",
-        operateur: "L'INCASSABLE"
+        operateur: null
       }
     },
     {
@@ -32957,7 +32957,7 @@ var pacaCommunes = {
       },
       properties: {
         nom: "Saint-Romain-en-Viennois",
-        operateur: "L'INCASSABLE"
+        operateur: null
       }
     },
     {
@@ -34457,7 +34457,7 @@ var pacaCommunes = {
       },
       properties: {
         nom: "Puyméras",
-        operateur: "L'INCASSABLE"
+        operateur: null
       }
     },
     {
@@ -34508,7 +34508,7 @@ var pacaCommunes = {
       },
       properties: {
         nom: "Faucon",
-        operateur: "L'INCASSABLE"
+        operateur: null
       }
     },
     {
