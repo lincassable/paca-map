@@ -44,7 +44,7 @@ function onEachFeature(feature, layer) {
   select.appendChild(option1);
   select.appendChild(option2);
   popup.appendChild(title);
-  popup.appendChild(select);
+  //popup.appendChild(select);
 
   layer.bindPopup(popup);
 }
