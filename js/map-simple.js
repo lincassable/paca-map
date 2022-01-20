@@ -27,7 +27,7 @@ L.geoJSON(lincassable, {
   style: function (feature) {
     return {
       color: "#3388ff",
-      weight: 0.3,
+      weight: 2,
       fill: true,
       fillColor: getColor("L'INCASSABLE"),
       fillOpacity: 0.4
@@ -43,7 +43,7 @@ L.geoJSON(laconsignedeprovence, {
   style: function (feature) {
     return {
       color: "#3388ff",
-      weight: 1,
+      weight: 2,
       fill: true,
       fillColor: getColor("LA CONSIGNE DE PROVENCE"),
       fillOpacity: 0.4
@@ -59,7 +59,7 @@ L.geoJSON(zonegrise, {
   style: function (feature) {
     return {
       color: "#3388ff",
-      weight: 1,
+      weight: 2,
       fill: true,
       fillColor: getColor(null),
       fillOpacity: 0.4
@@ -70,3 +70,12 @@ L.geoJSON(zonegrise, {
     return "LA CONSIGNE DE PROVENCE x L'INCASSABLE";
   })
   .addTo(map);
+
+L.geoJSON(pacaDepartements, {
+  style: function () {
+    return {
+      weight: 0.5,
+      fill: false
+    };
+  }
+}).addTo(map);
