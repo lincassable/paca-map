@@ -67,7 +67,7 @@ L.geoJSON(zonegrise, {
   }
 })
   .bindPopup((layer) => {
-    return "LA CONSIGNE DE PROVENCE x L'INCASSABLE";
+    return "<div>LA CONSIGNE DE PROVENCE et L'INCASSABLE</div><div>Zone d'action commune</div>";
   })
   .addTo(map);
 
